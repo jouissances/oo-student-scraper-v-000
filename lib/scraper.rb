@@ -28,23 +28,23 @@ class Scraper
     students_array
   end
 
-  def self.scrape_profile_page(profile_url)
-    html = File.read(profile_url)
-    profile_page = Nokogiri::HTML(html)
-    social = profile_page.css('div.social-icon-container').css('a')
+  # def self.scrape_profile_page(profile_url)
+  #   html = File.read(profile_url)
+  #   profile_page = Nokogiri::HTML(html)
+  #   social = profile_page.css('div.social-icon-container').css('a')
 
-    student_attr = {
-      :twitter => social.map { |x| x.attribute('href').value.scan(/[\S]+twitter[\S]+/)}.join(""),
-      :linkedin => social.map { |x| x.attribute('href').value.scan(/[\S]+linkedin[\S]+/)}.join(""),
-      :github => social.map { |x| x.attribute('href').value.scan(/[\S]+github[\S]+/)}.join(""),
-      :blog => social.map { |x| x.attribute('href').value.scan(/https?:..[^twg][\S]+/)}.join(""),
-      :profile_quote => profile_page.css('div.profile-quote').text,
-      :bio => profile_page.css('div.description-holder p').text
-    }
+  #   student_attr = {
+  #     :twitter => social.map { |x| x.attribute('href').value.scan(/[\S]+twitter[\S]+/)}.join(""),
+  #     :linkedin => social.map { |x| x.attribute('href').value.scan(/[\S]+linkedin[\S]+/)}.join(""),
+  #     :github => social.map { |x| x.attribute('href').value.scan(/[\S]+github[\S]+/)}.join(""),
+  #     :blog => social.map { |x| x.attribute('href').value.scan(/https?:..[^twg][\S]+/)}.join(""),
+  #     :profile_quote => profile_page.css('div.profile-quote').text,
+  #     :bio => profile_page.css('div.description-holder p').text
+  #   }
 
-    student_attr.delete_if { |key, val| val.to_s.strip.empty? }
+  #   student_attr.delete_if { |key, val| val.to_s.strip.empty? }
 
-  end
+  # end
 
 end
 
